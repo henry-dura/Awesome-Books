@@ -35,7 +35,7 @@ add.addEventListener('click', () => {
   book.innerHTML = `
     <p>${bookList[bookList.length - 1].title}</p>
     <p>${bookList[bookList.length - 1].author}</p>
-    <button id="${count}" class="push" onclick="removed(event)">Remove</button><hr>
+    <button id="${count}" class="push">Remove</button><hr>
     `;
   bookContainer.appendChild(book);
   title.value = '';
@@ -44,12 +44,11 @@ add.addEventListener('click', () => {
   localStorage.setItem('books', JSON.stringify(bookList));
 });
 
-// function to remove book
+// function to remove book using event propagation
 function removed(e) {
   e.target.parentElement.remove();
   bookList.splice(e.target.id, 1);
   localStorage.setItem('books', JSON.stringify(bookList));
 }
 
-// does nothing
-document.createElement('t').addEventListener('submit', removed);
+bookContainer.addEventListener('click', removed);
