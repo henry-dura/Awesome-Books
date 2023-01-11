@@ -1,54 +1,49 @@
 const add = document.querySelector('#add');
-const bookContainer = document.querySelector('.book-display');
+const bookTable = document.querySelector('.book-display');
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
 
-let bookList = [];
 
-// Add stored books  to page when visitor returns to site
-const data = JSON.parse(localStorage.getItem('books'));
-if (data) {
-  bookList = [...data];
-  for (let i = 0; i < bookList.length; i += 1) {
-    const book = document.createElement('div');
 
-    book.innerHTML = `
-    <p>${bookList[i].title}</p>
-    <p>${bookList[i].author}</p>
-    <button id="${i}" class="push" onclick="removed(event)">Remove</button><hr>
-    `;
-    bookContainer.appendChild(book);
+class Book{
+  constructor(title,author){
+    this.title = title;
+    this.author = author;
   }
+
+  static addToHtml(newBook){
+    let tableRow = document.createElement('tr');
+    tableRow.innerHTML = `
+    <td style="width:90%">${newBook.title} by ${newBook.author}</td>
+    <td><button id="${bookList.length}" class="remove" onclick="Book.removeBook(this)">Remove</button></td>`;
+    bookTable.appendChild(tableRow);
+  }
+
+  static removeBook(e) {
+    e.target.parentElement.parentElement.remove();
+    if(bookList.length > e.target.id){
+      bookList.splice(e.target.id, 1);
+    }else{
+      bookList.splice(-1,1);
+    }
+    localStorage.setItem('books', JSON.stringify(bookList));
+      
+  }
+
+  
 }
 
-// function to add book
-function addBook(title, author) {
-  bookList.push({ title, author });
-}
+let bookList;
+document.addEventListener('DOMContentLoaded',Book.loadBooksInStorage);
 
 // triggered when the add button is clicked
 add.addEventListener('click', () => {
-  const count = bookList.length;
-  addBook(title.value, author.value);
-  const book = document.createElement('div');
-
-  book.innerHTML = `
-    <p>${bookList[bookList.length - 1].title}</p>
-    <p>${bookList[bookList.length - 1].author}</p>
-    <button id="${count}" class="push">Remove</button><hr>
-    `;
-  bookContainer.appendChild(book);
-  title.value = '';
-  author.value = '';
-
+  let newBook = new Book(title.value, author.value);
+  Book.addToHtml(newBook);
+  bookList.push(newBook);
   localStorage.setItem('books', JSON.stringify(bookList));
+  Book.clearInputFields();
 });
 
-// function to remove book using event propagation
-function removed(e) {
-  e.target.parentElement.remove();
-  bookList.splice(e.target.id, 1);
-  localStorage.setItem('books', JSON.stringify(bookList));
-}
-
-bookContainer.addEventListener('click', removed);
+// removing book using event propogation
+bookTable.addEventListener('click', Book.removeBook);
