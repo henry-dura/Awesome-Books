@@ -30,7 +30,22 @@ class Book{
       
   }
 
-  
+  static loadBooksInStorage(){
+    const data = JSON.parse(localStorage.getItem('books'));
+    if (data) {
+      bookList = [...data];
+      for(let book of bookList){
+        Book.addToHtml(book)
+      }
+    }else{
+      bookList = []; 
+    }
+  }
+
+  static clearInputFields() {
+    title.value = "";
+    author.value = "";
+}
 }
 
 let bookList;
