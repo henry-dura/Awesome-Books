@@ -1,4 +1,18 @@
-[](https://img.shields.io/badge/Microverse-blueviolet)
+# 📗 Table of Contents
+
+- [📗 Table of Contents](#-table-of-contents)
+- [Awesome-Books](#awesome-books)
+  - [Built With](#built-with)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Install](#install)
+    - [Run tests](#run-tests)
+  - [Authors](#authors)
+  - [🔭 Future Features ](#-future-features-)
+  - [🤝 Contributing](#-contributing)
+  - [Show your support](#show-your-support)
+  - [Acknowledgments](#acknowledgments)
+  - [License](#license)
 # Awesome-Books
 - In this project, you will build a basic website that allows users to add/remove books from a list. You will achieve that by using JavaScript objects and arrays. You will also need to dynamically modify the DOM and add basic events.
 ## Built With
@@ -43,14 +57,10 @@ Install this project with:
 - Twitter: https://twitter.com/henryikemefuna
 - LinkedIn: https://www.linkedin.com/in/henry-ikemefuna-ugwu-3a2613100/
 
-
-## Authors
-
-👤 **Obed **
+👤 **Obed Bamfo**
 
 - GitHub: https://github.com/obed300
-
-
+- LinkedIn: https://www.linkedin.com/in/obed-bamfo-4b152421b/
 
 <!-- FUTURE FEATURES -->
 
