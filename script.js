@@ -3,16 +3,15 @@ const bookTable = document.querySelector('.book-display');
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
 
-
-
-class Book{
-  constructor(title,author){
+let bookList;
+class Book {
+  constructor(title, author) {
     this.title = title;
     this.author = author;
   }
 
-  static addToHtml(newBook){
-    let tableRow = document.createElement('tr');
+  static addToHtml(newBook) {
+    const tableRow = document.createElement('tr');
     tableRow.innerHTML = `
     <td style="width:90%">${newBook.title} by ${newBook.author}</td>
     <td><button id="${bookList.length}" class="remove" onclick="Book.removeBook(this)">Remove</button></td>`;
@@ -21,39 +20,35 @@ class Book{
 
   static removeBook(e) {
     e.target.parentElement.parentElement.remove();
-    if(bookList.length > e.target.id){
+    if (bookList.length > e.target.id) {
       bookList.splice(e.target.id, 1);
-    }else{
-      bookList.splice(-1,1);
+    } else {
+      bookList.splice(-1, 1);
     }
     localStorage.setItem('books', JSON.stringify(bookList));
-      
   }
 
-  static loadBooksInStorage(){
+  static loadBooksInStorage() {
     const data = JSON.parse(localStorage.getItem('books'));
     if (data) {
       bookList = [...data];
-      for(let book of bookList){
-        Book.addToHtml(book)
-      }
-    }else{
-      bookList = []; 
+      bookList.forEach((book) => Book.addToHtml(book));
+    } else {
+      bookList = [];
     }
   }
 
   static clearInputFields() {
-    title.value = "";
-    author.value = "";
-}
+    title.value = '';
+    author.value = '';
+  }
 }
 
-let bookList;
-document.addEventListener('DOMContentLoaded',Book.loadBooksInStorage);
+document.addEventListener('DOMContentLoaded', Book.loadBooksInStorage);
 
 // triggered when the add button is clicked
 add.addEventListener('click', () => {
-  let newBook = new Book(title.value, author.value);
+  const newBook = new Book(title.value, author.value);
   Book.addToHtml(newBook);
   bookList.push(newBook);
   localStorage.setItem('books', JSON.stringify(bookList));
