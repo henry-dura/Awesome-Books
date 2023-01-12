@@ -2,6 +2,15 @@ const add = document.querySelector('#add');
 const bookTable = document.querySelector('.book-display');
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
+const dateShow = document.querySelector('.date'); // selector for date display
+// selectors for Navigation class
+const listLink = document.querySelector('.list-link');
+const inputField = document.querySelector('.input-field');
+const addLink = document.querySelector('.add-link');
+const books =  document.querySelector('.books');
+const contact = document.querySelector('.contact');
+const contactLink = document.querySelector('.contact-link');
+
 
 let bookList;
 class Book {
