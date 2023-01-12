@@ -7,34 +7,31 @@ const dateShow = document.querySelector('.date'); // selector for date display
 const listLink = document.querySelector('.list-link');
 const inputField = document.querySelector('.input-field');
 const addLink = document.querySelector('.add-link');
-const books =  document.querySelector('.books');
+const books = document.querySelector('.books');
 const contact = document.querySelector('.contact');
 const contactLink = document.querySelector('.contact-link');
 
-
-class Navigation{
-
-  static listDisplay(){
-    books.style.display = 'block';
-    contact.style.display = 'none';
-    inputField.style.display = 'none';
-  }
-
-  static addDisplay(){
-    inputField.style.display = 'flex';
-    books.style.display = 'none';
-    contact.style.display = 'none';
-  }
-
-  static contactDisplay(){
-    contact.style.display = 'block';
-    inputField.style.display = 'none';
-    books.style.display = 'none';
-  }
+function listDisplay() {
+  books.style.display = 'block';
+  contact.style.display = 'none';
+  inputField.style.display = 'none';
 }
-addLink.addEventListener('click', Navigation.addDisplay);
-contactLink.addEventListener('click', Navigation.contactDisplay);
-listLink.addEventListener('click', Navigation.listDisplay);
+
+function addDisplay() {
+  inputField.style.display = 'flex';
+  books.style.display = 'none';
+  contact.style.display = 'none';
+}
+
+function contactDisplay() {
+  contact.style.display = 'block';
+  inputField.style.display = 'none';
+  books.style.display = 'none';
+}
+
+addLink.addEventListener('click', addDisplay);
+contactLink.addEventListener('click', contactDisplay);
+listLink.addEventListener('click', listDisplay);
 
 // function that handles date and time display in page
 const currentDate = () => {
@@ -85,10 +82,10 @@ class Book {
 }
 
 // triggered immediately the page loads
-document.addEventListener('DOMContentLoaded', ()=>{
+document.addEventListener('DOMContentLoaded', () => {
   Book.loadBooksInStorage();
-  Navigation.listDisplay();
-  currentDate(); 
+  listDisplay();
+  currentDate();
 });
 
 // triggered when the add button is clicked
