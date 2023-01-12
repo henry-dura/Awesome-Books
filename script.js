@@ -12,6 +12,37 @@ const contact = document.querySelector('.contact');
 const contactLink = document.querySelector('.contact-link');
 
 
+class Navigation{
+
+  static listDisplay(){
+    books.style.display = 'block';
+    contact.style.display = 'none';
+    inputField.style.display = 'none';
+  }
+
+  static addDisplay(){
+    inputField.style.display = 'flex';
+    books.style.display = 'none';
+    contact.style.display = 'none';
+  }
+
+  static contactDisplay(){
+    contact.style.display = 'block';
+    inputField.style.display = 'none';
+    books.style.display = 'none';
+  }
+}
+addLink.addEventListener('click', Navigation.addDisplay);
+contactLink.addEventListener('click', Navigation.contactDisplay);
+listLink.addEventListener('click', Navigation.listDisplay);
+
+// function that handles date and time display in page
+const currentDate = () => {
+  const newDate = new Date();
+  dateShow.innerHTML = `${newDate.toDateString()}, ${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()} am `;
+  setTimeout(currentDate, 1000); // makes date update every second
+};
+
 let bookList;
 class Book {
   constructor(title, author) {
@@ -53,7 +84,12 @@ class Book {
   }
 }
 
-document.addEventListener('DOMContentLoaded', Book.loadBooksInStorage);
+// triggered immediately the page loads
+document.addEventListener('DOMContentLoaded', ()=>{
+  Book.loadBooksInStorage();
+  Navigation.listDisplay();
+  currentDate(); 
+});
 
 // triggered when the add button is clicked
 add.addEventListener('click', () => {
